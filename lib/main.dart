@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         fontFamily: 'Montserrat',
+        appBarTheme: AppBarTheme(backgroundColor: Colors.white),
         primaryColor: ColorsUsed.secondary,
         scaffoldBackgroundColor: Colors.white,
         visualDensity: VisualDensity.adaptivePlatformDensity
