@@ -5,5 +5,4 @@ class ColorsUsed {
   static const Color secondary = Color(0xFFF5F5F5);
   // static const Color secondary = Colors.grey
 
-
 }
