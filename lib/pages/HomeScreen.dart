@@ -33,37 +33,41 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Row(
-        // mainAxisSize: MainAxisSize.max,
-        // mainAxisAlignment: MainAxisAlignment.center,
-        // crossAxisAlignment: CrossAxisAlignment.center,
+      body: Column(
         children: [
-          Container(
-            alignment: Alignment.center,
-            // color: Colors.yellow,
-            height: MediaQuery.of(context).size.height / 3,
-            width: MediaQuery.of(context).size.width,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  'WEDNESDAY'.toUpperCase(),
-                  style: S1TextStyle,
+          Row(
+            // mainAxisSize: MainAxisSize.max,
+            // mainAxisAlignment: MainAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                alignment: Alignment.center,
+                // color: Colors.yellow,
+                height: MediaQuery.of(context).size.height / 3,
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'WEDNESDAY'.toUpperCase(),
+                      style: S1TextStyle,
+                    ),
+                    Container(
+                      // color: Colors.lightBlueAccent,
+                      margin: EdgeInsets.only(top: 3),
+                      child: Text(
+                        '12:00 AM',
+                        style: MainTextStyle,
+                      ),
+                    ),
+                    Text(
+                      '00:00',
+                      style: S2TextStyle,
+                    ),
+                  ],
                 ),
-                Container(
-                  // color: Colors.lightBlueAccent,
-                  margin: EdgeInsets.only(top: 3),
-                  child: Text(
-                    '12:00 AM',
-                    style: MainTextStyle,
-                  ),
-                ),
-                Text(
-                  '00:00',
-                  style: S2TextStyle,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),
