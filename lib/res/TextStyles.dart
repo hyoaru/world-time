@@ -43,3 +43,13 @@ const S2TextStyle = TextStyle(
   letterSpacing: 25,
   // color: Colors.black,
 );
+
+const CarouselTextStyle = TextStyle(
+  fontFamily: 'Montserrat',
+  fontWeight: FontWeight.w500,
+  fontSize: BodyTextStyle,
+  color: ColorsUsed.primary,
+  letterSpacing: 0,
+
+  // color: Colors.black,
+);
