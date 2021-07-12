@@ -4,13 +4,22 @@ import 'package:flutter/services.dart';
 import 'package:worldtime/res/ColorsUsed.dart';
 import 'package:worldtime/res/TextStyles.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:worldtime/pages/DrawerHeader.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  // var scaffoldKey = GlobalKey<ScaffoldState>();
+  // final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey();
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // key: scaffoldKey,
       appBar: AppBar(
         // backgroundColor: ColorsUsed.primary,
         backgroundColor: Colors.white,
@@ -19,20 +28,36 @@ class HomeScreen extends StatelessWidget {
         title: Text(
           'Date here',
         ),
-        titleSpacing: 30,
+        titleSpacing: MediaQuery.of(context).size.width / 9,
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              CupertinoIcons.location,
-              size: 25,
-              color: ColorsUsed.primary,
-            ),
-          ),
+          Builder(builder: (context) {
+            return IconButton(
+                icon: Icon(
+                  CupertinoIcons.location,
+                  size: 25,
+                  color: ColorsUsed.primary,
+                ),
+                onPressed: () {
+                  setState(() {
+                    Scaffold.of(context).openDrawer();
+                  });
+                });
+          }),
           SizedBox(
-            width: 30,
+            width: MediaQuery.of(context).size.width / 13,
           ),
         ],
+      ),
+      endDrawer: Drawer(
+        child: SingleChildScrollView(
+          child: Container(
+            child: Column(
+              children: [
+                DrawerHeaders(),
+              ],
+            ),
+          ),
+        ),
       ),
       body: Column(
         children: [
