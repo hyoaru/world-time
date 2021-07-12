@@ -42,58 +42,89 @@ class HomeScreen extends StatelessWidget {
             // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                alignment: Alignment.center,
+                // alignment: Alignment.topCenter,
                 // color: Colors.yellow,
-                height: MediaQuery.of(context).size.height / 3.25,
+                height: MediaQuery.of(context).size.height / 1.9,
                 width: MediaQuery.of(context).size.width,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'WEDNESDAY'.toUpperCase(),
-                      style: S1TextStyle,
-                    ),
-                    Container(
-                      // color: Colors.lightBlueAccent,
-                      margin: EdgeInsets.only(top: 3),
-                      child: Text(
-                        '12:00 AM',
-                        style: MainTextStyle,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 50),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'WEDNESDAY'.toUpperCase(),
+                        style: S1TextStyle,
                       ),
-                    ),
-                    Text(
-                      '00:00',
-                      style: S2TextStyle,
-                    ),
-                  ],
+                      Container(
+                        // color: Colors.lightBlueAccent,
+                        margin: EdgeInsets.only(top: 3),
+                        child: Text(
+                          '12:00 AM',
+                          style: MainTextStyle,
+                        ),
+                      ),
+                      Text(
+                        '00:00',
+                        style: S2TextStyle,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
           ),
           CarouselSlider(
             options: CarouselOptions(
-              height: MediaQuery.of(context).size.height / 7,
+              height: MediaQuery.of(context).size.height / 5,
               // aspectRatio: 5.0,
-              viewportFraction: 0.3,
-              // enlargeCenterPage: true,
+              viewportFraction: 0.6,
+              enlargeCenterPage: true,
             ),
-            items: [1, 2, 3, 4, 5].map((i) {
+            items: [
+              1,
+              2,
+              3,
+            ].map((i) {
               return Builder(
                 builder: (BuildContext context) {
                   return Container(
+                      padding: EdgeInsets.all(15),
                       width: MediaQuery.of(context).size.width,
                       margin: EdgeInsets.symmetric(horizontal: 5.0),
                       decoration: BoxDecoration(
                         color: ColorsUsed.secondary,
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: Text(
-                          'text $i',
-                          style: CarouselTextStyle,
-                          textAlign: TextAlign.center,
-                        ),
+                      child: Row(
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Flexible(
+                            flex: 7,
+                            child: Container(
+                              // color: Colors.amber,
+                              // // alignment: Alignment.center,
+                              child: Text(
+                                'textasdasdsadasdadasdasdasdadfsdfsdfsdfsdfsd',
+                                style: CarouselTextStyle,
+                                // textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 30,
+                          ),
+                          Flexible(
+                            flex: 3,
+                            child: Container(
+                              // width: MediaQuery.of(context).size.width,
+                              alignment: Alignment.center,
+                              child: Text(
+                                '500',
+                                style: CarouselTextStyle,
+                              ),
+                            ),
+                          ),
+                        ],
                       ));
                 },
               );
