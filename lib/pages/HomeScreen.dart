@@ -38,9 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: ColorsUsed.primary,
                 ),
                 onPressed: () {
-                  setState(() {
-                    Scaffold.of(context).openDrawer();
-                  });
+                  return Scaffold.of(context).openDrawer();
                 });
           }),
           SizedBox(
