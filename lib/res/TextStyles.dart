@@ -7,6 +7,7 @@ const LargeTextSize = 26.0;
 const MediumTextSize = 20.0;
 const BodyTextStyle = 17.0;
 const AppBarTextSize = 15.0;
+const BottomWidgetBodyTextSize = 15.5;
 
 const AppBarTextStyle = TextStyle(
   fontFamily: 'Montserrat',
@@ -48,6 +49,26 @@ const CarouselTextStyle = TextStyle(
   fontFamily: 'Montserrat',
   fontWeight: FontWeight.w500,
   fontSize: BodyTextStyle,
+  color: ColorsUsed.primary,
+  letterSpacing: 0,
+
+  // color: Colors.black,
+);
+
+const BottomWidgetTextStyle = TextStyle(
+  fontFamily: 'Montserrat',
+  fontWeight: FontWeight.w700,
+  // fontSize: BodyTextStyle,
+  color: ColorsUsed.primary,
+  letterSpacing: 0,
+
+  // color: Colors.black,
+);
+
+const BottomWidgetBodyTextStyle = TextStyle(
+  fontFamily: 'Montserrat',
+  fontWeight: FontWeight.w500,
+  // fontSize: BottomWidgetBodyTextSize,
   color: ColorsUsed.primary,
   letterSpacing: 0,
 
