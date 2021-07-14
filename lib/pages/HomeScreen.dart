@@ -54,14 +54,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       endDrawer: Drawer(
-        child: SingleChildScrollView(
-          child: Container(
-            child: Column(
-              children: [
-                DrawerHeaders(),
-              ],
-            ),
-          ),
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeaders(),
+          ],
         ),
       ),
       body: Column(
@@ -104,14 +101,16 @@ class _HomeScreenState extends State<HomeScreen> {
                 Flexible(
                   flex: 4,
                   child: Container(
+                    alignment: Alignment.center,
                     child: Text(
-                      'Timezone Details',
+                      'Timezone\nDetails',
                       textAlign: TextAlign.center,
                       style: BottomWidgetTextStyle,
                     ),
                   ),
                 ),
                 SizedBox(
+                  // child: Container(color: Colors.black,),
                   width: MediaQuery.of(context).size.width / 40,
                 ),
                 Flexible(
