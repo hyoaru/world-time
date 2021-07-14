@@ -15,8 +15,9 @@ class _PreLoadingScreenState extends State<PreLoadingScreen> {
     WorldTimeAPI WorldTimeInit =
         WorldTimeAPI(location: 'Philippines', url: 'Asia/Manila');
 
-    await WorldTimeInit.getTime();
-    Future.delayed(Duration(seconds: 4), () {
+    Future.delayed(Duration(seconds: 4), () async {
+      await WorldTimeInit.getTime();
+      print(WorldTimeInit.dateNow);
       Navigator.pushReplacementNamed(context, '/home', arguments: {
         'dateNow': WorldTimeInit.dateNow,
         'weekday': WorldTimeInit.weekday,

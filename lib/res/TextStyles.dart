@@ -5,7 +5,7 @@ const MainTextSize = 45.0;
 const S2TextSize = 33.0;
 const LargeTextSize = 26.0;
 const MediumTextSize = 20.0;
-const BodyTextStyle = 17.0;
+const BodyTextStyle = 16.0;
 const AppBarTextSize = 15.0;
 const BottomWidgetBodyTextSize = 15.5;
 

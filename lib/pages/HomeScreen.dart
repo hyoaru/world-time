@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:worldtime/res/ColorsUsed.dart';
 import 'package:worldtime/res/TextStyles.dart';
 // import 'package:carousel_slider/carousel_slider.dart';
@@ -14,34 +13,41 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // var scaffoldKey = GlobalKey<ScaffoldState>();
-  // final GlobalKey<ScaffoldState> _scaffoldState = GlobalKey();
+  Map dataPassed = {};
   @override
   Widget build(BuildContext context) {
+    dataPassed = dataPassed.isNotEmpty
+        ? dataPassed
+        : ModalRoute.of(context)!.settings.arguments as Map;
     return Scaffold(
-      // key: scaffoldKey,
       appBar: AppBar(
-        // automaticallyImplyLeading: false,
-        // backgroundColor: ColorsUsed.primary,
         backgroundColor: Colors.white,
-        // brightness: Brightness.dark,
         elevation: 0,
         title: Text(
-          'Date here',
+          dataPassed['dateNow'],
         ),
         titleSpacing: MediaQuery.of(context).size.width / 9,
         actions: [
-          Builder(builder: (BuildContext context) {
-            return IconButton(
-                icon: Icon(
-                  CupertinoIcons.location,
-                  size: 25,
-                  color: ColorsUsed.primary,
-                ),
-                onPressed: () {
-                  return Scaffold.of(context).openEndDrawer();
-                });
-          }),
+          Container(
+            // padding: EdgeInsets.all(7),
+            // color: ColorsUsed.secondary,
+            // decoration:
+            // BoxDecoration(
+            //   color: ColorsUsed.secondary,
+            //   borderRadius: BorderRadius.circular(60),
+            // ),
+            child: Builder(builder: (BuildContext context) {
+              return IconButton(
+                  icon: Icon(
+                    CupertinoIcons.location,
+                    size: 21,
+                    color: ColorsUsed.primary,
+                  ),
+                  onPressed: () {
+                    return Scaffold.of(context).openEndDrawer();
+                  });
+            }),
+          ),
           SizedBox(
             width: MediaQuery.of(context).size.width / 13,
           ),
@@ -61,13 +67,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         children: [
           Row(
-            // mainAxisSize: MainAxisSize.max,
-            // mainAxisAlignment: MainAxisAlignment.center,
-            // crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                // alignment: Alignment.topCenter,
-                // color: Colors.yellow,
                 height: MediaQuery.of(context).size.height / 2.1,
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
@@ -76,19 +77,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'WEDNESDAY'.toUpperCase(),
+                        dataPassed['weekday'].toUpperCase(),
                         style: S1TextStyle,
                       ),
                       Container(
                         // color: Colors.lightBlueAccent,
                         margin: EdgeInsets.only(top: 3),
                         child: Text(
-                          '12:00 AM',
+                          dataPassed['timeNow12'].toUpperCase(),
                           style: MainTextStyle,
                         ),
                       ),
                       Text(
-                        '00:00',
+                        dataPassed['timeNow24'].toUpperCase(),
                         style: S2TextStyle,
                       ),
                     ],
@@ -103,7 +104,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 Flexible(
                   flex: 4,
                   child: Container(
-                    // color: ColorsUsed.primary,
                     child: Text(
                       'Timezone Details',
                       textAlign: TextAlign.center,
@@ -112,7 +112,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 SizedBox(
-                  // child: Container(color: Colors.amber),
                   width: MediaQuery.of(context).size.width / 40,
                 ),
                 Flexible(
@@ -120,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Container(
                     alignment: Alignment.center,
                     child: Text(
-                      'Asia/Manila',
+                      dataPassed['timezone'],
                       textAlign: TextAlign.center,
                       style: BottomWidgetTextStyle,
                     ),
@@ -136,7 +135,6 @@ class _HomeScreenState extends State<HomeScreen> {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               color: ColorsUsed.secondary,
-              // border: Border.all(width: .5, color: ColorsUsed.primary),
               borderRadius: BorderRadius.circular(20),
             ),
           ),
@@ -144,12 +142,20 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                BottomWidgetReUse(),
-                BottomWidgetReUse(),
-                BottomWidgetReUse(),
+                BottomWidgetReUse(
+                  label: 'Ordinal Day of the Week',
+                  value: dataPassed['dayOfWeek'],
+                ),
+                BottomWidgetReUse(
+                  label: 'Ordinal Week Number',
+                  value: dataPassed['weekNumber'],
+                ),
+                BottomWidgetReUse(
+                  label: 'Ordinal Day of the Year',
+                  value: dataPassed['dayOfYear'],
+                ),
               ],
             ),
-            // alignment: Alignment.center,
             margin: EdgeInsets.symmetric(
               horizontal: MediaQuery.of(context).size.width / 9,
               vertical: MediaQuery.of(context).size.height / 26.5,
@@ -160,63 +166,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   horizontal: BorderSide(width: .5, color: ColorsUsed.primary)),
             ),
           ),
-          // CarouselSlider(
-          //   options: CarouselOptions(
-          //     height: MediaQuery.of(context).size.height / 5,
-          //     // aspectRatio: 5.0,
-          //     viewportFraction: 0.6,
-          //     enlargeCenterPage: true,
-          //   ),
-          //   items: [
-          //     1,
-          //     2,
-          //     3,
-          //   ].map((i) {
-          //     return Builder(
-          //       builder: (BuildContext context) {
-          //         return Container(
-          //             padding: EdgeInsets.all(15),
-          //             width: MediaQuery.of(context).size.width,
-          //             margin: EdgeInsets.symmetric(horizontal: 5.0),
-          //             decoration: BoxDecoration(
-          //               color: ColorsUsed.secondary,
-          //               borderRadius: BorderRadius.circular(20),
-          //             ),
-          //             child: Row(
-          //               // mainAxisAlignment: MainAxisAlignment.center,
-          //               children: [
-          //                 Flexible(
-          //                   flex: 7,
-          //                   child: Container(
-          //                     // color: Colors.amber,
-          //                     // // alignment: Alignment.center,
-          //                     child: Text(
-          //                       'textasdasdsadasdadasdasdasdadfsdfsdfsdfsdfsd',
-          //                       style: CarouselTextStyle,
-          //                       // textAlign: TextAlign.center,
-          //                     ),
-          //                   ),
-          //                 ),
-          //                 SizedBox(
-          //                   width: MediaQuery.of(context).size.width / 30,
-          //                 ),
-          //                 Flexible(
-          //                   flex: 3,
-          //                   child: Container(
-          //                     // width: MediaQuery.of(context).size.width,
-          //                     alignment: Alignment.center,
-          //                     child: Text(
-          //                       '500',
-          //                       style: CarouselTextStyle,
-          //                     ),
-          //                   ),
-          //                 ),
-          //               ],
-          //             ));
-          //       },
-          //     );
-          //   }).toList(),
-          // )
         ],
       ),
     );
@@ -224,9 +173,10 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class BottomWidgetReUse extends StatelessWidget {
-  const BottomWidgetReUse({
-    Key? key,
-  }) : super(key: key);
+  final String label;
+  final String value;
+
+  BottomWidgetReUse({required this.label, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -234,18 +184,15 @@ class BottomWidgetReUse extends StatelessWidget {
       child: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Flexible(
               flex: 7,
               child: Container(
-                // alignment: Alignment.center,
                 child: Text(
-                  'Ordinal day of the year',
+                  '$label',
                   textAlign: TextAlign.center,
                   style: BottomWidgetBodyTextStyle,
                 ),
-                // color: Colors.black,
               ),
             ),
             SizedBox(
@@ -257,13 +204,11 @@ class BottomWidgetReUse extends StatelessWidget {
             Flexible(
               flex: 3,
               child: Container(
-                // alignment: Alignment.topCenter,
                 child: Text(
-                  '200',
+                  '$value',
                   textAlign: TextAlign.center,
                   style: BottomWidgetTextStyle,
                 ),
-                // color: Colors.black,
               ),
             ),
           ],
