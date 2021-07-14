@@ -34,12 +34,12 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
           visualDensity: VisualDensity.adaptivePlatformDensity),
 
-      home: HomeScreen(),
-      // initialRoute: 'home',
-      // routes: {
-      //   '/': (context) => PreloadingScreen(),
-      //   '/home': (context) => HomeScreen(),
-      // },
+      // home: PreLoadingScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => PreLoadingScreen(),
+        'home': (context) => HomeScreen(),
+      },
     );
   }
 }

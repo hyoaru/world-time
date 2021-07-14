@@ -1,22 +1,48 @@
 import 'package:flutter/material.dart';
-import 'package:worldtime/res/colorsused.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:worldtime/services/WorldTimeAPI.dart';
+import 'package:worldtime/res/ColorsUsed.dart';
 
-class PreloadingScreen extends StatefulWidget {
-  const PreloadingScreen({ Key? key }) : super(key: key);
+class PreLoadingScreen extends StatefulWidget {
+  const PreLoadingScreen({Key? key}) : super(key: key);
 
   @override
-  _PreloadingScreenState createState() => _PreloadingScreenState();
+  _PreLoadingScreenState createState() => _PreLoadingScreenState();
 }
 
-class _PreloadingScreenState extends State<PreloadingScreen> {
+class _PreLoadingScreenState extends State<PreLoadingScreen> {
+  void HomeScreenInitialize() async {
+    WorldTimeAPI WorldTimeInit =
+        WorldTimeAPI(location: 'Philippines', url: 'Asia/Manila');
+
+    await WorldTimeInit.getTime();
+    Navigator.pushReplacementNamed(context, '/home', arguments: {
+      'dateNow': WorldTimeInit.dateNow,
+      'weekday': WorldTimeInit.weekday,
+      'timeNow12': WorldTimeInit.timeNow12,
+      'timeNow24': WorldTimeInit.timeNow24,
+      'timezone': WorldTimeInit.timezone,
+      'dayOfWeek': WorldTimeInit.dayOfWeek,
+      'weekNumber': WorldTimeInit.weekNumber,
+      'dayOfYear': WorldTimeInit.dayOfYear,
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    HomeScreenInitialize();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsUsed.secondary,
-      body: Container(
-        child: Text('location page'),
+      body: Center(
+        child: SpinKitFadingFour(
+          color: ColorsUsed.primary,
+          size: 50.0,
+        ),
       ),
-      
     );
   }
 }
