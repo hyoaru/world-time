@@ -16,15 +16,17 @@ class _PreLoadingScreenState extends State<PreLoadingScreen> {
         WorldTimeAPI(location: 'Philippines', url: 'Asia/Manila');
 
     await WorldTimeInit.getTime();
-    Navigator.pushReplacementNamed(context, '/home', arguments: {
-      'dateNow': WorldTimeInit.dateNow,
-      'weekday': WorldTimeInit.weekday,
-      'timeNow12': WorldTimeInit.timeNow12,
-      'timeNow24': WorldTimeInit.timeNow24,
-      'timezone': WorldTimeInit.timezone,
-      'dayOfWeek': WorldTimeInit.dayOfWeek,
-      'weekNumber': WorldTimeInit.weekNumber,
-      'dayOfYear': WorldTimeInit.dayOfYear,
+    Future.delayed(Duration(seconds: 4), () {
+      Navigator.pushReplacementNamed(context, '/home', arguments: {
+        'dateNow': WorldTimeInit.dateNow,
+        'weekday': WorldTimeInit.weekday,
+        'timeNow12': WorldTimeInit.timeNow12,
+        'timeNow24': WorldTimeInit.timeNow24,
+        'timezone': WorldTimeInit.timezone,
+        'dayOfWeek': WorldTimeInit.dayOfWeek,
+        'weekNumber': WorldTimeInit.weekNumber,
+        'dayOfYear': WorldTimeInit.dayOfYear,
+      });
     });
   }
 
