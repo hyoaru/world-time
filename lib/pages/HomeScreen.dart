@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:worldtime/res/ColorsUsed.dart';
 import 'package:worldtime/res/TextStyles.dart';
-// import 'package:carousel_slider/carousel_slider.dart';
 import 'package:worldtime/pages/DrawerHeader.dart';
+import 'package:worldtime/services/WorldTimeAPI.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,6 +14,35 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Map dataPassed = {};
+
+  List<WorldTimeAPI> tiles = [
+    WorldTimeAPI(location: 'Canada', url: 'America/Vancouver'),
+    WorldTimeAPI(location: 'Egypt', url: 'Africa/Cairo'),
+    WorldTimeAPI(location: 'England', url: 'Europe/London'),
+    WorldTimeAPI(location: 'France', url: 'Europe/Paris'),
+    WorldTimeAPI(location: 'Japan', url: 'Asia/Tokyo'),
+    WorldTimeAPI(location: 'Korea', url: 'Asia/Seoul'),
+    WorldTimeAPI(location: 'Netherlands', url: 'Europe/Amsterdam'),
+    WorldTimeAPI(location: 'Philippines', url: 'Asia/Manila'),
+    WorldTimeAPI(location: 'United Arab Emirates', url: 'Asia/Dubai'),
+  ];
+
+  void UpdateTime(index) async {
+    WorldTimeAPI WorldTimeUpdate = tiles[index];
+    await WorldTimeUpdate.getTime();
+
+    Navigator.pop(context, {
+      dataPassed['dateNow'] = WorldTimeUpdate.dateNow,
+      dataPassed['weekday'] = WorldTimeUpdate.weekday,
+      dataPassed['timeNow12'] = WorldTimeUpdate.timeNow12,
+      dataPassed['timeNow24'] = WorldTimeUpdate.timeNow24,
+      dataPassed['timezone'] = WorldTimeUpdate.timezone,
+      dataPassed['dayOfWeek'] = WorldTimeUpdate.dayOfWeek,
+      dataPassed['weekNumber'] = WorldTimeUpdate.weekNumber,
+      dataPassed['dayOfYear'] = WorldTimeUpdate.dayOfYear,
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     dataPassed = dataPassed.isNotEmpty
@@ -58,6 +87,33 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: EdgeInsets.zero,
           children: [
             DrawerHeaders(),
+            Container(
+              height: double.maxFinite,
+              padding: EdgeInsets.only(left: 20, right: 20, top: 5),
+              child: ListView.builder(
+                itemCount: tiles.length,
+                itemExtent: 50,
+                itemBuilder: (context, index) {
+                  return Container(
+                    child: ListTile(
+                      onTap: () {
+                        UpdateTime(index);
+                      },
+                      leading: Icon(
+                        CupertinoIcons.location,
+                        color: ColorsUsed.primary,
+                        size: 35,
+                      ),
+                      title: Text(
+                        tiles[index].location,
+                        style: DrawerBodyTextStyle,
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            // DrawerBody(),
           ],
         ),
       ),
@@ -225,3 +281,70 @@ class BottomWidgetReUse extends StatelessWidget {
     );
   }
 }
+
+// class DrawerBody extends StatefulWidget {
+//   const DrawerBody({Key? key}) : super(key: key);
+
+//   @override
+//   _DrawerBodyState createState() => _DrawerBodyState();
+// }
+
+// class _DrawerBodyState extends State<DrawerBody> {
+//   List<WorldTimeAPI> tiles = [
+//     WorldTimeAPI(location: 'Canada', url: 'America/Vancouver'),
+//     WorldTimeAPI(location: 'Egypt', url: 'Africa/Cairo'),
+//     WorldTimeAPI(location: 'England', url: 'Europe/London'),
+//     WorldTimeAPI(location: 'France', url: 'Europe/Paris'),
+//     WorldTimeAPI(location: 'Japan', url: 'Asia/Tokyo'),
+//     WorldTimeAPI(location: 'Korea', url: 'Asia/Seoul'),
+//     WorldTimeAPI(location: 'Netherlands', url: 'Europe/Amsterdam'),
+//     WorldTimeAPI(location: 'Philippines', url: 'Asia/Manila'),
+//     WorldTimeAPI(location: 'United Arab Emirates', url: 'Asia/Dubai'),
+//   ];
+
+//   void UpdateTime(index) async {
+//     WorldTimeAPI WorldTimeUpdate = tiles[index];
+//     await WorldTimeUpdate.getTime();
+
+//     Navigator.pop(context, {
+//       'dateNow': WorldTimeUpdate.dateNow,
+//       'weekday': WorldTimeUpdate.weekday,
+//       'timeNow12': WorldTimeUpdate.timeNow12,
+//       'timeNow24': WorldTimeUpdate.timeNow24,
+//       'timezone': WorldTimeUpdate.timezone,
+//       'dayOfWeek': WorldTimeUpdate.dayOfWeek,
+//       'weekNumber': WorldTimeUpdate.weekNumber,
+//       'dayOfYear': WorldTimeUpdate.dayOfYear,
+//     });
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       height: double.maxFinite,
+//       padding: EdgeInsets.only(left: 20, right: 20, top: 5),
+//       child: ListView.builder(
+//         itemCount: tiles.length,
+//         itemExtent: 50,
+//         itemBuilder: (context, index) {
+//           return Container(
+//             child: ListTile(
+//               onTap: () {
+//                 UpdateTime(index);
+//               },
+//               leading: Icon(
+//                 CupertinoIcons.location,
+//                 color: ColorsUsed.primary,
+//                 size: 35,
+//               ),
+//               title: Text(
+//                 tiles[index].location,
+//                 style: DrawerBodyTextStyle,
+//               ),
+//             ),
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }

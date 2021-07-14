@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'ColorsUsed.dart';
 
-const MainTextSize = 49.0;
-const S2TextSize = 36.0;
+const MainTextSize = 47.0;
+const S2TextSize = 37.0;
 const LargeTextSize = 26.0;
 const MediumTextSize = 20.0;
-const BodyTextStyle = 17.0;
+const BodyTextStyle = 16.0;
 const AppBarTextSize = 15.0;
 const BottomWidgetBodyTextSize = 15.5;
+const DrawerHeaderTextSize = 18.5;
+const DrawerBodyTextSize = 16.5;
 
 const AppBarTextStyle = TextStyle(
   fontFamily: 'Montserrat',
@@ -32,7 +34,7 @@ const S1TextStyle = TextStyle(
   fontWeight: FontWeight.w500,
   fontSize: BodyTextStyle,
   color: ColorsUsed.primary,
-  letterSpacing: 12,
+  letterSpacing: 13,
   // color: Colors.black,
 );
 
@@ -77,8 +79,18 @@ const BottomWidgetBodyTextStyle = TextStyle(
 
 const DrawerHeaderTextStyle = TextStyle(
   fontFamily: 'Montserrat',
+  fontWeight: FontWeight.w700,
+  fontSize: DrawerHeaderTextSize,
+  color: ColorsUsed.primary,
+  letterSpacing: 0,
+
+  // color: Colors.black,
+);
+
+const DrawerBodyTextStyle = TextStyle(
+  fontFamily: 'Montserrat',
   fontWeight: FontWeight.w500,
-  fontSize: BottomWidgetBodyTextSize,
+  fontSize: DrawerBodyTextSize,
   color: ColorsUsed.primary,
   letterSpacing: 0,
 

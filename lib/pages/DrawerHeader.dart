@@ -3,14 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:worldtime/res/ColorsUsed.dart';
 import 'package:worldtime/res/TextStyles.dart';
 
-class DrawerHeaders extends StatefulWidget {
+class DrawerHeaders extends StatelessWidget {
   const DrawerHeaders({Key? key}) : super(key: key);
 
-  @override
-  _DrawerHeaderState createState() => _DrawerHeaderState();
-}
-
-class _DrawerHeaderState extends State<DrawerHeaders> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,6 +20,7 @@ class _DrawerHeaderState extends State<DrawerHeaders> {
             child: Icon(
               CupertinoIcons.location_circle,
               size: 65,
+              color: ColorsUsed.primary,
             ),
           ),
           SizedBox(

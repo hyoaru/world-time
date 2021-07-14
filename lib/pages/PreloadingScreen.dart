@@ -17,7 +17,7 @@ class _PreLoadingScreenState extends State<PreLoadingScreen> {
 
     Future.delayed(Duration(seconds: 4), () async {
       await WorldTimeInit.getTime();
-      print(WorldTimeInit.dateNow);
+      // print(WorldTimeInit.dateNow);
       Navigator.pushReplacementNamed(context, '/home', arguments: {
         'dateNow': WorldTimeInit.dateNow,
         'weekday': WorldTimeInit.weekday,
