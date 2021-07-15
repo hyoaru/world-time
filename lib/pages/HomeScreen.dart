@@ -4,6 +4,7 @@ import 'package:worldtime/res/ColorsUsed.dart';
 import 'package:worldtime/res/TextStyles.dart';
 import 'package:worldtime/pages/DrawerHeader.dart';
 import 'package:worldtime/services/WorldTimeAPI.dart';
+import 'dart:async';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Timer timerer = Timer.periodic(Duration(seconds: 10), (timer) {});
   Map dataPassed = {};
 
   List<WorldTimeAPI> tiles = [
@@ -31,17 +33,33 @@ class _HomeScreenState extends State<HomeScreen> {
     WorldTimeAPI WorldTimeUpdate = tiles[index];
     await WorldTimeUpdate.getTime();
 
-    Navigator.pop(context, {
-      dataPassed['dateNow'] = WorldTimeUpdate.dateNow,
-      dataPassed['weekday'] = WorldTimeUpdate.weekday,
-      dataPassed['timeNow12'] = WorldTimeUpdate.timeNow12,
-      dataPassed['timeNow24'] = WorldTimeUpdate.timeNow24,
-      dataPassed['timezone'] = WorldTimeUpdate.timezone,
-      dataPassed['dayOfWeek'] = WorldTimeUpdate.dayOfWeek,
-      dataPassed['weekNumber'] = WorldTimeUpdate.weekNumber,
-      dataPassed['dayOfYear'] = WorldTimeUpdate.dayOfYear,
+    // Timer.periodic(Duration(seconds: 1), (timer) async {
+    // });
+
+    Navigator.pop(context);
+
+    timerer = new Timer.periodic(Duration(seconds: 1), (timer) {
+      WorldTimeUpdate.getTime();
+      setState(() {
+        dataPassed['dateNow'] = WorldTimeUpdate.dateNow;
+        dataPassed['weekday'] = WorldTimeUpdate.weekday;
+        dataPassed['timeNow12'] = WorldTimeUpdate.timeNow12;
+        dataPassed['timeNow24'] = WorldTimeUpdate.timeNow24;
+        dataPassed['timezone'] = WorldTimeUpdate.timezone;
+        dataPassed['dayOfWeek'] = WorldTimeUpdate.dayOfWeek;
+        dataPassed['weekNumber'] = WorldTimeUpdate.weekNumber;
+        dataPassed['dayOfYear'] = WorldTimeUpdate.dayOfYear;
+
+        print(dataPassed['timeNow24']);
+      });
     });
   }
+
+  // void UpdateTTime() {
+  //   Timer.periodic(Duration(seconds: 1), (timer) {
+  //     UpdateTime(index);
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -97,7 +115,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   return Container(
                     child: ListTile(
                       onTap: () {
-                        UpdateTime(index);
+                        if (timerer.isActive == true) {
+                          timerer.cancel();
+                          UpdateTime(index);
+                        } else {
+                          UpdateTime(index);
+                        }
                       },
                       leading: Icon(
                         CupertinoIcons.location,

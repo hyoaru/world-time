@@ -12,21 +12,21 @@ class PreLoadingScreen extends StatefulWidget {
 
 class _PreLoadingScreenState extends State<PreLoadingScreen> {
   void HomeScreenInitialize() async {
-    WorldTimeAPI WorldTimeInit =
-        WorldTimeAPI(location: 'Philippines', url: 'Asia/Manila');
+    // WorldTimeAPI WorldTimeInit =
+    //     WorldTimeAPI(location: 'Philippines', url: 'Asia/Manila');
 
     Future.delayed(Duration(seconds: 4), () async {
-      await WorldTimeInit.getTime();
+      // await WorldTimeInit.getTime();
       // print(WorldTimeInit.dateNow);
       Navigator.pushReplacementNamed(context, '/home', arguments: {
-        'dateNow': WorldTimeInit.dateNow,
-        'weekday': WorldTimeInit.weekday,
-        'timeNow12': WorldTimeInit.timeNow12,
-        'timeNow24': WorldTimeInit.timeNow24,
-        'timezone': WorldTimeInit.timezone,
-        'dayOfWeek': WorldTimeInit.dayOfWeek,
-        'weekNumber': WorldTimeInit.weekNumber,
-        'dayOfYear': WorldTimeInit.dayOfYear,
+        'dateNow': '---- -- ----',
+        'weekday': 'choose your',
+        'timeNow12': 'location',
+        'timeNow24': '00:00',
+        'timezone': '-------',
+        'dayOfWeek': '0',
+        'weekNumber': '0',
+        'dayOfYear': '0',
       });
     });
   }
