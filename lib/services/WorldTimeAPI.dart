@@ -28,7 +28,7 @@ class WorldTimeAPI {
       weekNumber = responseData['week_number'].toString();
       timezone = responseData['timezone'];
 
-      String offset = responseData['utc_offset'].substring(1, 3);
+      String offset = responseData['utc_offset'].substring(0, 3);
 
       DateTime timeNow = DateTime.parse(dateTime);
       timeNow = timeNow.add(Duration(hours: int.parse(offset)));
