@@ -66,186 +66,206 @@ class _HomeScreenState extends State<HomeScreen> {
     dataPassed = dataPassed.isNotEmpty
         ? dataPassed
         : ModalRoute.of(context)!.settings.arguments as Map;
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Text(
-          dataPassed['dateNow'],
-        ),
-        titleSpacing: MediaQuery.of(context).size.width / 9,
-        actions: [
-          Container(
-            // padding: EdgeInsets.all(7),
-            // color: ColorsUsed.secondary,
-            // decoration:
-            // BoxDecoration(
-            //   color: ColorsUsed.secondary,
-            //   borderRadius: BorderRadius.circular(60),
-            // ),
-            child: Builder(builder: (BuildContext context) {
-              return IconButton(
-                  icon: Icon(
-                    CupertinoIcons.location,
-                    size: 21,
-                    color: ColorsUsed.primary,
-                  ),
-                  onPressed: () {
-                    return Scaffold.of(context).openEndDrawer();
-                  });
-            }),
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width / 13,
-          ),
-        ],
-      ),
-      endDrawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeaders(),
-            Container(
-              height: double.maxFinite,
-              padding: EdgeInsets.only(left: 20, right: 20, top: 5),
-              child: ListView.builder(
-                itemCount: tiles.length,
-                itemExtent: 50,
-                itemBuilder: (context, index) {
-                  return Container(
-                    child: ListTile(
-                      onTap: () {
-                        if (timerer.isActive == true) {
-                          timerer.cancel();
-                          UpdateTime(index);
-                        } else {
-                          UpdateTime(index);
-                        }
-                      },
-                      leading: Icon(
+    return Stack(
+      children: [
+        Container(
+            constraints: BoxConstraints.expand(),
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/background.png'),
+                    fit: BoxFit.cover))),
+        Scaffold(
+          extendBody: true,
+          backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            brightness: Brightness.dark,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            title: Text(
+              dataPassed['dateNow'],
+            ),
+            titleSpacing: MediaQuery.of(context).size.width / 9,
+            actions: [
+              Container(
+                // padding: EdgeInsets.all(7),
+                // color: ColorsUsed.secondary,
+                // decoration:
+                // BoxDecoration(
+                //   color: ColorsUsed.secondary,
+                //   borderRadius: BorderRadius.circular(60),
+                // ),
+                child: Builder(builder: (BuildContext context) {
+                  return IconButton(
+                      icon: Icon(
                         CupertinoIcons.location,
+                        size: 21,
                         color: ColorsUsed.primary,
-                        size: 35,
                       ),
-                      title: Text(
-                        tiles[index].location,
-                        style: DrawerBodyTextStyle,
-                      ),
+                      onPressed: () {
+                        return Scaffold.of(context).openEndDrawer();
+                      });
+                }),
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 13,
+              ),
+            ],
+          ),
+          endDrawer: Drawer(
+            child: Container(
+              color: ColorsUsed.secondary,
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  DrawerHeaders(),
+                  Container(
+                    // color: Colors.black,
+                    height: double.maxFinite,
+                    padding: EdgeInsets.only(left: 20, right: 20, top: 0),
+                    child: ListView.builder(
+                      itemCount: tiles.length,
+                      itemExtent: 50,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          // padding: EdgeInsets.only(left: 20, right: 20, top: 5),
+                          // color: Colors.black,
+                          child: ListTile(
+                            onTap: () {
+                              if (timerer.isActive == true) {
+                                timerer.cancel();
+                                UpdateTime(index);
+                              } else {
+                                UpdateTime(index);
+                              }
+                            },
+                            leading: Icon(
+                              CupertinoIcons.location,
+                              color: ColorsUsed.primary,
+                              size: 35,
+                            ),
+                            title: Text(
+                              tiles[index].location,
+                              style: DrawerBodyTextStyle,
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                  );
-                },
+                  ),
+                  // DrawerBody(),
+                ],
               ),
             ),
-            // DrawerBody(),
-          ],
-        ),
-      ),
-      body: Column(
-        children: [
-          Row(
+          ),
+          body: Column(
             children: [
-              Container(
-                height: MediaQuery.of(context).size.height / 2.1,
-                width: MediaQuery.of(context).size.width,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 25),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        dataPassed['weekday'].toUpperCase(),
-                        style: S1TextStyle,
+              Row(
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height / 2.1,
+                    width: MediaQuery.of(context).size.width,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 25),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            dataPassed['weekday'].toUpperCase(),
+                            style: S1TextStyle,
+                          ),
+                          Container(
+                            // color: Colors.lightBlueAccent,
+                            margin: EdgeInsets.only(top: 3),
+                            child: Text(
+                              dataPassed['timeNow12'].toUpperCase(),
+                              style: MainTextStyle,
+                            ),
+                          ),
+                          Text(
+                            dataPassed['timeNow24'].toUpperCase(),
+                            style: S2TextStyle,
+                          ),
+                        ],
                       ),
-                      Container(
-                        // color: Colors.lightBlueAccent,
-                        margin: EdgeInsets.only(top: 3),
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                child: Row(
+                  children: [
+                    Flexible(
+                      flex: 4,
+                      child: Container(
+                        alignment: Alignment.center,
                         child: Text(
-                          dataPassed['timeNow12'].toUpperCase(),
-                          style: MainTextStyle,
+                          'Timezone\nDetails',
+                          textAlign: TextAlign.center,
+                          style: BottomWidgetTextStyle,
                         ),
                       ),
-                      Text(
-                        dataPassed['timeNow24'].toUpperCase(),
-                        style: S2TextStyle,
+                    ),
+                    SizedBox(
+                      // child: Container(color: Colors.black,),
+                      width: MediaQuery.of(context).size.width / 40,
+                    ),
+                    Flexible(
+                      flex: 4,
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Text(
+                          dataPassed['timezone'],
+                          textAlign: TextAlign.center,
+                          style: BottomWidgetTextStyle,
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
+                ),
+                alignment: Alignment.center,
+                margin: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width / 9),
+                padding: EdgeInsets.all(15),
+                height: MediaQuery.of(context).size.height / 9,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  color: ColorsUsed.secondary,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    BottomWidgetReUse(
+                      label: 'Ordinal Day of the Week',
+                      value: dataPassed['dayOfWeek'],
+                    ),
+                    BottomWidgetReUse(
+                      label: 'Ordinal Week Number',
+                      value: dataPassed['weekNumber'],
+                    ),
+                    BottomWidgetReUse(
+                      label: 'Ordinal Day of the Year',
+                      value: dataPassed['dayOfYear'],
+                    ),
+                  ],
+                ),
+                margin: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width / 9,
+                  vertical: MediaQuery.of(context).size.height / 26.5,
+                ),
+                height: MediaQuery.of(context).size.height / 6,
+                decoration: BoxDecoration(
+                  border: Border.symmetric(
+                      horizontal:
+                          BorderSide(width: 1, color: ColorsUsed.primary)),
                 ),
               ),
             ],
           ),
-          Container(
-            child: Row(
-              children: [
-                Flexible(
-                  flex: 4,
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      'Timezone\nDetails',
-                      textAlign: TextAlign.center,
-                      style: BottomWidgetTextStyle,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  // child: Container(color: Colors.black,),
-                  width: MediaQuery.of(context).size.width / 40,
-                ),
-                Flexible(
-                  flex: 4,
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      dataPassed['timezone'],
-                      textAlign: TextAlign.center,
-                      style: BottomWidgetTextStyle,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            alignment: Alignment.center,
-            margin: EdgeInsets.symmetric(
-                horizontal: MediaQuery.of(context).size.width / 9),
-            padding: EdgeInsets.all(15),
-            height: MediaQuery.of(context).size.height / 9,
-            width: MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
-              color: ColorsUsed.secondary,
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                BottomWidgetReUse(
-                  label: 'Ordinal Day of the Week',
-                  value: dataPassed['dayOfWeek'],
-                ),
-                BottomWidgetReUse(
-                  label: 'Ordinal Week Number',
-                  value: dataPassed['weekNumber'],
-                ),
-                BottomWidgetReUse(
-                  label: 'Ordinal Day of the Year',
-                  value: dataPassed['dayOfYear'],
-                ),
-              ],
-            ),
-            margin: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width / 9,
-              vertical: MediaQuery.of(context).size.height / 26.5,
-            ),
-            height: MediaQuery.of(context).size.height / 6,
-            decoration: BoxDecoration(
-              border: Border.symmetric(
-                  horizontal: BorderSide(width: .5, color: ColorsUsed.primary)),
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

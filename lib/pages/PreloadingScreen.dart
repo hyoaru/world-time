@@ -40,10 +40,19 @@ class _PreLoadingScreenState extends State<PreLoadingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SpinKitFadingFour(
-          color: ColorsUsed.primary,
-          size: 50.0,
+      backgroundColor: ColorsUsed.secondary,
+      appBar: AppBar(
+        backgroundColor: ColorsUsed.secondary,
+        elevation: 0.0,
+        brightness: Brightness.dark,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: 70),
+        child: Center(
+          child: SpinKitFadingFour(
+            color: ColorsUsed.primary,
+            size: 50.0,
+          ),
         ),
       ),
     );

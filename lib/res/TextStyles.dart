@@ -13,7 +13,7 @@ const DrawerBodyTextSize = 16.5;
 
 const AppBarTextStyle = TextStyle(
   fontFamily: 'Montserrat',
-  fontWeight: FontWeight.w500,
+  fontWeight: FontWeight.w700,
   fontSize: AppBarTextSize,
   color: ColorsUsed.primary,
   letterSpacing: 0.5,
@@ -31,7 +31,7 @@ const MainTextStyle = TextStyle(
 
 const S1TextStyle = TextStyle(
   fontFamily: 'Montserrat',
-  fontWeight: FontWeight.w500,
+  fontWeight: FontWeight.w700,
   fontSize: BodyTextStyle,
   color: ColorsUsed.primary,
   letterSpacing: 13,
@@ -40,7 +40,7 @@ const S1TextStyle = TextStyle(
 
 const S2TextStyle = TextStyle(
   fontFamily: 'Montserrat',
-  fontWeight: FontWeight.w100,
+  fontWeight: FontWeight.w300,
   fontSize: S2TextSize,
   color: ColorsUsed.primary,
   letterSpacing: 27,
