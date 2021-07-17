@@ -55,6 +55,20 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  void Sammi() {
+    Navigator.pop(context);
+    setState(() {
+      dataPassed['dateNow'] = 'From hamruru';
+      dataPassed['weekday'] = 'hi sammimi';
+      dataPassed['timeNow12'] = 'labyu <3';
+      dataPassed['timeNow24'] = '00:00';
+      dataPassed['timezone'] = '-------';
+      dataPassed['dayOfWeek'] = "HEHE";
+      dataPassed['weekNumber'] = "ENGE";
+      dataPassed['dayOfYear'] = "KITH";
+    });
+  }
+
   // void UpdateTTime() {
   //   Timer.periodic(Duration(seconds: 1), (timer) {
   //     UpdateTime(index);
@@ -118,6 +132,30 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.zero,
                 children: [
                   DrawerHeaders(),
+                  Container(
+                    // alignment: Alignment.center,
+                    margin: EdgeInsets.only(left: 20, right: 20, top: 8),
+                    height: MediaQuery.of(context).size.height / 25,
+                    child: ListTile(
+                      onTap: () {
+                        if (timerer.isActive == true) {
+                          timerer.cancel();
+                          Sammi();
+                        } else {
+                          Sammi();
+                        }
+                      },
+                      leading: Icon(
+                        CupertinoIcons.heart_circle,
+                        color: ColorsUsed.primary,
+                        size: 35,
+                      ),
+                      title: Text(
+                        'Sammi',
+                        style: DrawerBodyTextStyle,
+                      ),
+                    ),
+                  ),
                   Container(
                     // color: Colors.black,
                     height: double.maxFinite,
